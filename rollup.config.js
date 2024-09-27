@@ -1,19 +1,20 @@
 import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
+
+const production = !process.env.ROLLUP_WATCH;
 
 export default {
   input: 'index.js',
   output: {
     file: 'dist/bundle.js',
-    format: 'iife'
+    format: 'iife',
+    sourcemap: true
   },
   plugins: [
-    replace({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
-      preventAssignment: true
-    }),
     resolve(),
-    commonjs()
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(production ? 'production' : 'development'),
+      preventAssignment: true
+    })
   ]
 };

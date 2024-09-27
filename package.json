@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c",
-    "build:dev": "rollup -c --environment NODE_ENV:development"
+    "build:dev": "rollup -c --environment NODE_ENV:development",
+    "watch": "rollup -c -w"
   },
   "dependencies": {
     "echarts": "^5.5.1",
