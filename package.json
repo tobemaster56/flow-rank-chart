@@ -1,0 +1,21 @@
+{
+  "name": "echarts-demo",
+  "version": "1.0.0",
+  "description": "A simple ECharts demo",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "build:dev": "rollup -c --environment NODE_ENV:development"
+  },
+  "dependencies": {
+    "echarts": "^5.5.1",
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.0",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-replace": "^6.0.1",
+    "rollup": "^4.22.5"
+  }
+}
