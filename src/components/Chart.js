@@ -11,7 +11,6 @@ import {
 import { LabelLayout, UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 
-import { getOption } from '../utils/dataProcessing.js';
 
 echarts.use([
   TitleComponent,
@@ -36,4 +35,3 @@ export function initChart(container) {
 
 export { echarts }
 
-export { getOption };
