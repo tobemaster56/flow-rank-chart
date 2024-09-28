@@ -1,4 +1,18 @@
-export const defaultData = [
+export interface ListItem {
+  name: string;
+  value: number;
+}
+
+export interface DataItem {
+  date: string;
+  list: ListItem[];
+}
+
+export interface DataItemWithTotal extends DataItem {
+  total: number;
+}
+
+export const defaultData: DataItem[] = [
   {
     date: '2022年02月',
     list: [

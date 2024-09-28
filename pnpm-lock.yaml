@@ -25,12 +25,24 @@ devDependencies:
   '@rollup/plugin-terser':
     specifier: ^0.4.4
     version: 0.4.4(rollup@4.22.5)
+  '@rollup/plugin-typescript':
+    specifier: ^11.1.5
+    version: 11.1.6(rollup@4.22.5)(typescript@5.6.2)
+  '@types/lodash-es':
+    specifier: ^4.17.9
+    version: 4.17.12
+  prettier:
+    specifier: ^3.3.3
+    version: 3.3.3
   rollup:
     specifier: ^4.22.5
     version: 4.22.5
   rollup-plugin-visualizer:
     specifier: ^5.12.0
     version: 5.12.0(rollup@4.22.5)
+  typescript:
+    specifier: ^5.2.2
+    version: 5.6.2
 
 packages:
 
@@ -134,6 +146,25 @@ packages:
       serialize-javascript: 6.0.2
       smob: 1.5.0
       terser: 5.34.0
+    dev: true
+
+  /@rollup/plugin-typescript@11.1.6(rollup@4.22.5)(typescript@5.6.2):
+    resolution: {integrity: sha512-R92yOmIACgYdJ7dJ97p4K69I8gg6IEHt8M7dUBxN3W6nrO8uUxX5ixl0yU/N3aZTi8WhPuICvOHXQvF6FaykAA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.14.0||^3.0.0||^4.0.0
+      tslib: '*'
+      typescript: '>=3.7.0'
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+      tslib:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.1.2(rollup@4.22.5)
+      resolve: 1.22.8
+      rollup: 4.22.5
+      typescript: 5.6.2
     dev: true
 
   /@rollup/pluginutils@5.1.2(rollup@4.22.5):
@@ -281,6 +312,16 @@ packages:
 
   /@types/estree@1.0.6:
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
+    dev: true
+
+  /@types/lodash-es@4.17.12:
+    resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
+    dependencies:
+      '@types/lodash': 4.17.9
+    dev: true
+
+  /@types/lodash@4.17.9:
+    resolution: {integrity: sha512-w9iWudx1XWOHW5lQRS9iKpK/XuRhnN+0T7HvdCCd802FYkT1AMTnxndJHGrNJwRoRHkslGr4S29tjm1cT7x/7w==}
     dev: true
 
   /@types/resolve@1.20.2:
@@ -465,6 +506,12 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
+  /prettier@3.3.3:
+    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
   /randombytes@2.1.0:
     resolution: {integrity: sha1-32+ENy8CcNxlzfYpE0mrekc9Tyo=}
     dependencies:
@@ -594,6 +641,12 @@ packages:
   /tslib@2.3.0:
     resolution: {integrity: sha1-gDuM2rPhK6WBpMpByIObuw2ssJ4=}
     dev: false
+
+  /typescript@5.6.2:
+    resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    dev: true
 
   /wrap-ansi@7.0.0:
     resolution: {integrity: sha1-Z+FFz/UQpqaYS98RUpEdadLrnkM=}
