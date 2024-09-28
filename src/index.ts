@@ -87,6 +87,7 @@ function getOffset({
     .reduce((offset, item) => offset + maxY * (item.value / max), 0);
 }
 
+// 以散点图画出柱状堆叠效果
 function createScatterSeries(
   seriesDataMap: Record<string, number[]>,
   maxY: number,
@@ -115,6 +116,11 @@ function createScatterSeries(
           value: radioValue,
           radioValue,
           realValue: value,
+          /**
+           * 默认情况下，标记会居中置放在数据对应的位置，但是如果 symbol 是自定义的矢量路径或者图片，就有可能不希望 symbol 居中。
+           * 这时候可以使用该配置项配置 symbol 相对于原本居中的偏移，可以是绝对的像素值，也可以是相对的百分比。
+           * 例如 [0, '50%'] 就是把自己向下移动了一半的位置
+           */
           symbolOffset: [0, "50%"],
           symbolSize: [50, ySize],
         },
@@ -135,6 +141,8 @@ function createScatterSeries(
       return result;
     });
 
+    console.log("seriesData", seriesData);
+    console.log("res", res);
     return {
       name,
       type: "scatter",
@@ -264,6 +272,18 @@ function createLineSeries(
 
   return [...spaceLineSeries, ...lineSeries];
 }
+
+/**
+ * 1. 以散点图画出柱状堆叠效果（柱状图的堆叠图无法满足hover小块效果）
+ *   - y轴分成100个刻度，每个刻度代表1%，以控制大数据视图效果
+ * 2. 在柱状图两根柱之间构建6个点，使用面积图，连接2块柱
+ *   - 柱中间点位取的是y轴的平均值
+ *   - （若想构建的曲线细腻，可以使用曲线函数来构建这部分的点）
+ * 3. 再使用上面6个点中的下面点绘制透明区域
+ * @param initData
+ * @param maxY
+ * @param maxHeight
+ */
 
 function createOption(initData: DataItem[], maxY: number, maxHeight: number) {
   const { list, legendData, xAxisData, seriesDataMap, max } =
