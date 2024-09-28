@@ -96,6 +96,45 @@ function createScatterSeries(
 ): ScatterSeriesOption[] {
   return Object.keys(seriesDataMap).map((name) => {
     const seriesData = seriesDataMap[name];
+    const res = seriesData.flatMap((value, dateIndex) => {
+      const y = maxY * (value / max);
+      const ySize = maxHeight * (y / maxY);
+      const offset = getOffset({ list, dateIndex, name, max, maxY });
+      const radioValue = y + offset > 100 ? 100 : y + offset;
+
+      const result: {
+        name?: string;
+        value: string | number;
+        radioValue: number;
+        realValue: number;
+        symbolOffset?: (string | number)[];
+        symbolSize?: [number, number];
+      }[] = [
+        {
+          name,
+          value: radioValue,
+          radioValue,
+          realValue: value,
+          symbolOffset: [0, "50%"],
+          symbolSize: [50, ySize],
+        },
+      ];
+
+      if (dateIndex < seriesData.length - 1) {
+        result.push(
+          ...createArray(3).map((_, lineIndex) => ({
+            value: "",
+            radioValue,
+            realValue: value,
+            isLine: true,
+            lineIndex,
+          })),
+        );
+      }
+
+      return result;
+    });
+
     return {
       name,
       type: "scatter",
@@ -115,44 +154,7 @@ function createScatterSeries(
               <div>${params.seriesName}：${formatMoney((params.data as any).realValue)}</div>
             </div>`,
       },
-      data: seriesData.flatMap((value, dateIndex) => {
-        const y = maxY * (value / max);
-        const ySize = maxHeight * (y / maxY);
-        const offset = getOffset({ list, dateIndex, name, max, maxY });
-        const radioValue = y + offset > 100 ? 100 : y + offset;
-
-        const result: {
-          name?: string;
-          value: string | number;
-          radioValue: number;
-          realValue: number;
-          symbolOffset?: (string | number)[];
-          symbolSize?: [number, number];
-        }[] = [
-          {
-            name,
-            value: radioValue,
-            radioValue,
-            realValue: value,
-            symbolOffset: [0, "50%"],
-            symbolSize: [50, ySize],
-          },
-        ];
-
-        if (dateIndex < seriesData.length - 1) {
-          result.push(
-            ...createArray(3).map((_, lineIndex) => ({
-              value: "",
-              radioValue,
-              realValue: value,
-              isLine: true,
-              lineIndex,
-            })),
-          );
-        }
-
-        return result;
-      }),
+      data: res,
     };
   });
 }
